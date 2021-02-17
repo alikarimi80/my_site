@@ -71,6 +71,14 @@
             outline: 0px !important;
         }
 
+        #messages {
+            background-color: grey;
+            color: #fff;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+
     </style>
 
 </head>
@@ -111,12 +119,22 @@
                     </div>
 
 
+                    <script src='https://www.google.com/recaptcha/api.js'></script>
+                    <div class="g-recaptcha" data-sitekey="6LcYClwaAAAAAHx3c8nQOCvrbf48stmh8XdqSRgA"></div>
+
+
+                    {% for message in messages %}
+                        <p id="messages">{{ message }}</p>
+                    {% endfor %}
+
+
                     <div class="d-flex justify-content-center mt-3 login_container">
                         <input class="btn login_btn" type="submit" value="Register Account">
                     </div>
 
                 </form>
             </div>
+
 
             {{ form.errors }}
 
