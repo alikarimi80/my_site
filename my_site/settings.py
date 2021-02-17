@@ -128,4 +128,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'ak.alikarimi1380@gmail.com'
-EMAIL_HOST_PASSWORD = 'zaralari1400'
+EMAIL_HOST_PASSWORD = '******'
