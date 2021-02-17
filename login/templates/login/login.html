@@ -114,6 +114,13 @@
 					<p id="messages">{{message}}</p>
 				{% endfor %}
 
+                <div class="mt-4">
+					<div class="d-flex justify-content-center links">
+						Forgot your password? <a href="{% url 'login:reset_password' %}" class="ml-2">Reset your password</a>
+					</div>
+
+				</div>
+
 				<div class="mt-4">
 					<div class="d-flex justify-content-center links">
 						Don't have an account? <a href="{% url 'login:register' %}" class="ml-2">Sign Up</a>
