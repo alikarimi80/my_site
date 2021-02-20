@@ -6,5 +6,5 @@ from django.urls import path
 app_name = 'exam'
 # Be careful setting the name to just /login use userlogin instead!
 urlpatterns = [
-    path('<int:id>/<int:id2>', views.lists),
+    path('<int:id1>', views.lists),
 ]

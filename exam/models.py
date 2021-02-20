@@ -9,7 +9,7 @@ class Exams(models.Model):
         return self.exam
 
 
-class Questoins(models.Model):
+class Questions(models.Model):
     exams = models.ForeignKey(Exams, on_delete=models.CASCADE, null=True)
     question = models.TextField(null=True)
 
@@ -18,7 +18,7 @@ class Questoins(models.Model):
 
 
 class Choices(models.Model):
-    questions = models.ForeignKey(Questoins, on_delete=models.CASCADE)
+    questions = models.ForeignKey(Questions, on_delete=models.CASCADE)
     text = models.CharField(max_length=200, null=True)
     checked = models.BooleanField(null=True)
 

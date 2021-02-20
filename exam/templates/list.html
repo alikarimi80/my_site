@@ -1,53 +1,21 @@
-{#{% extends "main.html" %}#}
-{#{% block title %}View List{% endblock %}#}
-{##}
-{#{% block content %}#}
-{##}
-{#    <form method="post" action="">#}
-{#        {% csrf_token %}#}
-{#        <textarea name="message" rows="10" cols="100"></textarea>#}
-{#        <ul>#}
-{#            {% for item in ls.choices_set.all %}#}
-{#                <p>{{ item.text }}</p>#}
-{#            {% endfor %}#}
-{#        </ul>#}
-{#        <button type="submit" , name="newItem" , value="newItem">Add Item</button>#}
-{#        <input type="text" , name="new">#}
-{#        <button type="submit" , name="save" , value="save">Add another question</button>#}
-{##}
-{#    </form>#}
-{#{% endblock %}#}
-
+{% extends "main.html" %}
 
 
 {% block content %}
     <form method="post" action="#">
         {% csrf_token %}
         <ul>
-        {% for items in ls %}
-            <li>{{ items }}</li>
-            {% for item in ch %}
-                <input type="checkbox" id="choices" name="ch" value="choice">
-                <label for="choices"> {{ item }}</label><br>
+            {% for items in ex.questions_set.all %}
+                <li>{{ items }}</li>
+                {% for item in items.choices_set.all %}
+                    <input type="checkbox", id="choices" name="c{{ item.id }}" , value="clicked">
+                    <label for="choices"> {{ item }} </label><br>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-        <input type="submit" value="Submit">
+            <button type="submit" , name="save" , value="save">Save</button>
+
+
         </ul>
-{#        <ul>#}
-{#            <p>{{ ls }}</p>#}
-{#            <input type="checkbox" id="choices" name="ch" value="choice">#}
-{#            <label for="choices"> {{ ch }}</label><br>#}
-{##}
-{##}
-{#            <input type="submit" value="Submit">#}
-{#            {% for item in ls.question_set.all %}#}
-{#                <p>{{ item.question }}</p>#}
-{#                {% for item in ls.choices_set.all %}#}
-{#                    <input type="checkbox" id="vehicle1" name="vehicle1" value="choice">#}
-{#                    <label for="vehicle1"> {{ item }}</label><br>#}
-{#                {% endfor %}#}
-{#            {% endfor %}#}
-{#        </ul>#}
     </form>
 {% endblock %}
 
