@@ -56,7 +56,7 @@ def examiner(request):
     participated = list(examStatus.objects.filter(user_id=request.user.id).values('exam_id'))
     for i in participated:
         pexamid.append(i['exam_id'])
-
+    pexamid = list(dict.fromkeys(pexamid))
     for i in range(len(y)):
         x = list(Exam.objects.get(id=i + 1).examiner_group.all())
         examgrouplist.append(x)
