@@ -1,20 +1,18 @@
-{% extends "main.html" %}
+{% extends "exam/main.html" %}
 
 
 {% block content %}
     <form method="post" action="#">
         {% csrf_token %}
         <ul>
-            {% for items in ex.questions_set.all %}
+            {% for items in ex.question_set.all %}
                 <li>{{ items }}</li>
-                {% for item in items.choices_set.all %}
+                {% for item in items.choice_set.all %}
                     <input type="checkbox", id="choices" name="c{{ item.id }}" , value="clicked">
                     <label for="choices"> {{ item }} </label><br>
                 {% endfor %}
             {% endfor %}
             <button type="submit" , name="save" , value="save">Save</button>
-
-
         </ul>
     </form>
 {% endblock %}

@@ -1,20 +1,15 @@
-from django.shortcuts import render, redirect
-from login.forms import CreateUserForm
-from django.contrib.auth import authenticate, login, logout
-from django.http import HttpResponseRedirect, HttpResponse
-from django.urls import reverse
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+import json
+import urllib
 
-from django.forms import inlineformset_factory
-
-from .models import *
-from .forms import CreateUserForm
-from .decorators import unauthenticated_user, allowed_users, admin_only
-from django.contrib.auth.models import Group
-import urllib, json
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import Group
+from django.shortcuts import render, redirect
+
+from .decorators import unauthenticated_user
+from .forms import CreateUserForm
 
 
 def register(request):

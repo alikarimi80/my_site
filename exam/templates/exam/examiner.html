@@ -1,0 +1,43 @@
+{%  extends 'exam/main.html' %}
+
+{% block content %}
+
+	<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Participated exams:</h5>
+			<hr>
+            {% for items in pexam %}
+                <a href="{% url 'exam:exam page' items.id  %}" class="ml-2"><p>{{ items }}</p></a>
+{#                <p>{{ items }}</p>#}
+            {% endfor %}
+
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Unparticipated exams:</h5>
+			<hr>
+            {% for items in upexam %}
+                <a href="{% url 'exam:exam page' items.id  %}" class="ml-2"><p>{{ items }}</p></a>
+{#                <p>{{ items }}</p>#}
+            {% endfor %}
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>All exams:</h5>
+			<hr>
+            {% for items in exam %}
+                <p>{{ items }}</p>
+            {% endfor %}
+		</div>
+	</div>
+</div>
+
+
+{% endblock %}
