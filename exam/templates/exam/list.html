@@ -8,8 +8,13 @@
             {% for items in ex.question_set.all %}
                 <li>{{ items }}</li>
                 {% for item in items.choice_set.all %}
-                    <input type="checkbox", id="choices" name="c{{ item.id }}" , value="clicked">
-                    <label for="choices"> {{ item }} </label><br>
+                    {% if item.checked == True %}
+                        <li><input type="checkbox", value="clicked", name="c{{item.id}}" checked>{{item}}</li>
+                    {% else %}
+                        <li><input type="checkbox", value="clicked", name="c{{item.id}}">{{item}}</li>
+                    {% endif %}
+{#                    <input type="checkbox", id="choices" name="c{{ item.id }}" , value="clicked">#}
+{#                    <label for="choices"> {{ item }} </label><br>#}
                 {% endfor %}
             {% endfor %}
             <button type="submit" , name="save" , value="save">Save</button>
