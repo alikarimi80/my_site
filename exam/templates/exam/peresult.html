@@ -1,0 +1,24 @@
+{% extends "exam/main.html" %}
+{% load get_the_choice %}
+
+
+{% block content %}
+    <form method="post" action="#">
+        {% csrf_token %}
+        <ul>
+            {% for items in questions %}
+                <li>{{ items }}</li>
+                {% for key in ch1 %}
+                    {% if key.question_id == items.id %}
+                        {% if key.choice == True %}
+                            <li><input type="checkbox" value="clicked" name="c{{key.choice_id}}" checked>{{key.choice_id|getch}}</li>
+                        {% else %}
+                            <li><input type="checkbox" value="clicked" name="c{{key.choice_id}}">{{key.choice_id|getch}}</li>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+            <button type="submit" , name="save" , value="save">Save</button>
+        </ul>
+    </form>
+{% endblock %}
