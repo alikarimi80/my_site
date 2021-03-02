@@ -10,7 +10,7 @@
 			<h5>Participated exams:</h5>
 			<hr>
             {% for items in pexam %}
-                <a href="{% url 'exam:exam page' items.id  %}" class="ml-2"><p>{{ items }}</p></a>
+                <a href="{% url 'exam:participated exam results' items.id  %}" class="ml-2"><p>{{ items }}</p></a>
             {% endfor %}
 
 		</div>

@@ -10,29 +10,30 @@ def lists(response, id1):
     ex = Exam.objects.get(id=id1)
     ls = Question.objects.all()
     ch = Choice.objects.all()
-    exs = examStatus.objects
+    for i in ex.question_set.all():
+        for t in i.choice_set.all():
+            print(t)
 
     if response.method == "POST":
         if response.POST.get("save"):
-            for item in ch:
-                if response.POST.get("c" + str(item.id)) == "clicked":
-                    item.checked = True
-                    examResultTable = ExamResult.objects.create(user_id=response.user.id, exam_id=ex.id,
-                                                                question_id=item.questions.id, choice_id=item.id,
-                                                                choice=item.checked)
+            for i in ex.question_set.all():
+                for item in i.choice_set.all():
+                    if response.POST.get("c" + str(item.id)) == "clicked":
+                        item.checked = True
+                        examResultTable = ExamResult.objects.create(user_id=response.user.id, exam_id=ex.id,
+                                                                    question_id=item.questions.id, choice_id=item.id,
+                                                                    choice=item.checked)
 
-                else:
-                    item.checked = False
-                    examResultTable = ExamResult.objects.create(user_id=response.user.id, exam_id=ex.id,
-                                                                question_id=item.questions.id, choice_id=item.id,
-                                                                choice=item.checked)
+                    else:
+                        item.checked = False
+                        examResultTable = ExamResult.objects.create(user_id=response.user.id, exam_id=ex.id,
+                                                                    question_id=item.questions.id, choice_id=item.id,
+                                                                    choice=item.checked)
 
-                item.save()
-                examResultTable.save()
-                ex.status = 'Participated'
-                ex.save()
-            examResultStatus = examStatus.objects.create(user_id=response.user.id, exam_id=ex.id)
-            examResultStatus.save()
+                    item.save()
+                    examResultTable.save()
+        examResultStatus = examStatus.objects.create(user_id=response.user.id, exam_id=ex.id)
+        examResultStatus.save()
 
     return render(response, "exam/list.html",
                   {"ls": ls, "ch": ch, "id": id1, "ex": ex, "choices": Choice, "questions": Question})
@@ -44,7 +45,7 @@ def examiner(request):
     y = list(Exam.objects.all())
 
     exam = []
-    aexam=[]
+    aexam = []
     upexam = []
     aexamid = []
     pexam = []
@@ -92,3 +93,19 @@ def examiner(request):
                       {'pexam': pexam, 'upexam': upexam, 'exam': exam})
     else:
         return HttpResponse("<h1>You don't have any exam yet</h1>")
+
+
+def peresult(request, id2):
+    ch1 = ExamResult.objects.filter(exam_id=id2, user_id=request.user.id).values('question_id', 'choice_id', 'choice')
+
+    qu = ExamResult.objects.filter(exam_id=id2, user_id=request.user.id).values('question_id')
+    questions = []
+    x = []
+    for i in list(qu):
+        x.append(i['question_id'])
+        x = list(x)
+        x = list(dict.fromkeys(x))
+    for i in x:
+        questions.append(Question.objects.get(id=i))
+
+    return render(request, "exam/peresult.html", {'questions': questions, 'ch1': list(ch1)})

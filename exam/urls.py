@@ -8,4 +8,5 @@ app_name = 'exam'
 urlpatterns = [
     path('<int:id1>', views.lists, name="exam page"),
     path('examiner/', views.examiner, name="examiner page"),
+    path('participated/<int:id2>', views.peresult, name="participated exam results")
 ]
