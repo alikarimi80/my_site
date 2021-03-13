@@ -98,14 +98,15 @@ def examiner(request):
 def peresult(request, id2):
     ch1 = ExamResult.objects.filter(exam_id=id2, user_id=request.user.id).values('question_id', 'choice_id', 'choice')
 
-    qu = ExamResult.objects.filter(exam_id=id2, user_id=request.user.id).values('question_id')
+    # qu = ExamResult.objects.filter(exam_id=id2, user_id=request.user.id).values('question_id')
     questions = []
-    x = []
-    for i in list(qu):
-        x.append(i['question_id'])
-        x = list(x)
-        x = list(dict.fromkeys(x))
-    for i in x:
-        questions.append(Question.objects.get(id=i))
+    question_ids = []
+    for question in list(ch1):
+        q_id = question['question_id']
+        if q_id not in question_ids:
+            question_ids.append(q_id)
+
+    for q_id in question_ids:
+        questions.append(Question.objects.get(id=q_id))
 
     return render(request, "exam/peresult.html", {'questions': questions, 'ch1': list(ch1)})
